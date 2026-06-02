@@ -1,0 +1,51 @@
+flowchart TB
+    %% Box Model
+    subgraph Box_Model[HTML Box Model]
+        direction TB
+        Content[Content box\nText, images, and inline content]
+        Padding[Padding box\nSpace around content]
+        Border[Border box\nEdge around content + padding]
+        Margin[Margin box\nOuter spacing outside the border]
+
+        Margin --> Border --> Padding --> Content
+    end
+
+    %% Box Sizing
+    subgraph Box_Sizing[CSS Box Size]
+        direction LR
+        Intrinsic[Intrinsic sizing\nSize comes from content]
+        Restricted[Restricted sizing\nSize comes from CSS or parent limits]
+
+        Intrinsic --- Restricted
+    end
+
+    %% Block-Level Boxes
+    subgraph Block_Level[Block-Level Boxes]
+        direction TB
+        Block[Block-level element]
+        Width[Usually fills available inline width]
+        Height[Height comes from content or CSS]
+        Flow[Rendered top to bottom]
+        BFC[Participates in block formatting context]
+
+        Block --> Width
+        Block --> Height
+        Block --> Flow
+        Block --> BFC
+    end
+
+    %% Inline vs Block
+    subgraph Inline_vs_Block[Inline vs Block]
+        direction LR
+        Inline[Inline element]
+        Block2[Block element]
+
+        Inline --> TextFlow[Flows like text\nLeft to right]
+        Inline --> InlineCtx[Participates in inline formatting context]
+        Inline --> NoSize[Ignores width and height]
+        Inline --> VerticalMargins[Does not react to vertical margins]
+
+        Block2 --> NewLine[Starts on a new line]
+        Block2 --> BlockLayout[Creates structural layout]
+        Block2 --> Sized[Respects width and height]
+    end
